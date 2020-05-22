@@ -1,3 +1,5 @@
+@import '../../utils/variables.scss';
+
 .header {
   padding: 10px;
   background-color: #00c853;
@@ -5,11 +7,8 @@
   box-shadow: 0 1px 3px 0 rgba(48, 48, 48, .7);
 
   &__container {
-    display: flex;
-    justify-content: space-between;
+    @include container;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
   }
 
   &__logo {
