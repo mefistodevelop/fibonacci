@@ -1,0 +1,19 @@
+.app {
+  &__header {
+    padding: 10px;
+    background-color: #00c853;
+    min-height: 60px;
+  }
+
+  &__header-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  &__logo {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+}

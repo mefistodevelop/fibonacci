@@ -15,7 +15,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/i,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -25,17 +25,22 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/,
+        test: /\.scss$/,
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
+          'sass-loader',
         ],
       },
     ],
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   devServer: {
     port: 3000,
     open: true,
+    historyApiFallback: true,
     proxy: {
       '/api': 'http://localhost:8080',
     },
