@@ -1,0 +1,17 @@
+import axios from 'axios';
+
+const instance = axios.create({
+  baseURL: 'http://localhost:8080/api/',
+});
+
+export const fibApi = {
+  getFibonacci(number) {
+    instance.get(`fib?number=${number}`).then((response) => {
+      debugger;
+    });
+  },
+
+  getHistory() {
+    return instance.get('history').then((response) => response.data);
+  },
+};
