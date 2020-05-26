@@ -3,6 +3,7 @@ import './Form.scss';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
+import { fibApi } from '../../../api/api';
 
 const Form = () => {
   const [number, setNumber] = useState('');
@@ -12,9 +13,11 @@ const Form = () => {
     setNumber(e.target.value);
   };
 
-  const onFormSubmit = (e) => {
+  const onFormSubmit = async (e) => {
     e.preventDefault();
     if (number && number.trim()) {
+      const response = await fibApi.getFibonacci(number);
+      setNumber(response);
       setModal(true);
     }
   };

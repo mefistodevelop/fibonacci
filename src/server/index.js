@@ -3,7 +3,7 @@ const cors = require('cors');
 
 const app = express();
 
-const database = [
+let database = [
   {
     id: 1,
     ip: '122.123.1.1',
@@ -27,8 +27,39 @@ const database = [
   },
 ];
 
+const createRequest = (ip, request, response, date) => ({
+  ip,
+  request,
+  response,
+  date,
+  id: database.length + 1,
+});
+
+const addNewRequest = (newRequest) => {
+  database = [...database, newRequest];
+};
+
+const calcFibonacci = (number) => Math.floor(number * Math.random());
+
+const getDate = () => {
+  const dateTime = new Date();
+  const date = dateTime.toLocaleDateString();
+  const time = dateTime.toLocaleTimeString();
+  return `${date} ${time}`;
+};
+
 app.get('/api/history', cors(), (req, res) => {
   res.json(database);
+});
+
+app.get('/api/fib', cors(), (req, res) => {
+  const { number } = req.query;
+  const { ip } = req;
+  const fib = calcFibonacci(number);
+  const date = getDate();
+  const newRequest = createRequest(ip, number, fib, date);
+  addNewRequest(newRequest);
+  res.json({ number: fib });
 });
 
 app.use(express.static('dist'));

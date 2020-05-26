@@ -6,9 +6,7 @@ const instance = axios.create({
 
 export const fibApi = {
   getFibonacci(number) {
-    instance.get(`fib?number=${number}`).then((response) => {
-      debugger;
-    });
+    return instance.get(`fib?number=${number}`).then((response) => response.data.number);
   },
 
   getHistory() {
