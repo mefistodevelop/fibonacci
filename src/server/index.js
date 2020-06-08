@@ -8,21 +8,21 @@ let database = [
     id: 1,
     ip: '122.123.1.1',
     request: 10,
-    response: 300,
+    response: 89,
     date: '11.11.2019',
   },
   {
     id: 2,
     ip: '122.124.1.2',
     request: 1,
-    response: 123,
+    response: 1,
     date: '01.01.2020',
   },
   {
     id: 3,
     ip: '122.129.5.1',
     request: 1123,
-    response: 12300,
+    response: 3.569625363791541e+234,
     date: '07.03.2020',
   },
 ];
@@ -39,7 +39,23 @@ const addNewRequest = (newRequest) => {
   database = [...database, newRequest];
 };
 
-const calcFibonacci = (number) => Math.floor(number * Math.random());
+const calcFibonacci = (number) => {
+  let num = number;
+  let a = 1;
+  let b = 0;
+  let temp = 0;
+
+  while (num >= 0) {
+    temp = a;
+    a += b;
+    b = temp;
+    num -= 1;
+  }
+  return b;
+};
+
+console.log(calcFibonacci(2000));
+
 
 const getDate = () => {
   const dateTime = new Date();
@@ -59,7 +75,13 @@ app.get('/api/fib', cors(), (req, res) => {
   const date = getDate();
   const newRequest = createRequest(ip, number, fib, date);
   addNewRequest(newRequest);
-  res.json({ number: fib });
+
+  // eslint-disable-next-line
+  if (isFinite(fib)) {
+    res.json({ number: fib });
+  } else {
+    res.json({ number: fib.toString() });
+  }
 });
 
 app.use(express.static('dist'));
