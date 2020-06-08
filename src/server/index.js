@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const fibonacci = require('./fibonacci');
 
 const app = express();
 
@@ -39,24 +40,6 @@ const addNewRequest = (newRequest) => {
   database = [...database, newRequest];
 };
 
-const calcFibonacci = (number) => {
-  let num = number;
-  let a = 1;
-  let b = 0;
-  let temp = 0;
-
-  while (num >= 0) {
-    temp = a;
-    a += b;
-    b = temp;
-    num -= 1;
-  }
-  return b;
-};
-
-console.log(calcFibonacci(2000));
-
-
 const getDate = () => {
   const dateTime = new Date();
   const date = dateTime.toLocaleDateString();
@@ -71,7 +54,7 @@ app.get('/api/history', cors(), (req, res) => {
 app.get('/api/fib', cors(), (req, res) => {
   const { number } = req.query;
   const { ip } = req;
-  const fib = calcFibonacci(number);
+  const fib = fibonacci.calc(number);
   const date = getDate();
   const newRequest = createRequest(ip, number, fib, date);
   addNewRequest(newRequest);
