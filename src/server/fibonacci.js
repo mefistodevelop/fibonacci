@@ -1,4 +1,4 @@
-const _ = require('lodash');
+const memoize = require('lodash.memoize');
 
 const calcFibonacci = (number) => {
   let num = number;
@@ -15,5 +15,5 @@ const calcFibonacci = (number) => {
   return b;
 };
 
-const memoizedCalcFibonacci = _.memoize(calcFibonacci);
+const memoizedCalcFibonacci = memoize(calcFibonacci);
 exports.calc = memoizedCalcFibonacci;
